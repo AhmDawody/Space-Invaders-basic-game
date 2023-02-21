@@ -95,33 +95,33 @@ static void move_enemy_y(void);
 // Initialize enemies, ship and bunker position and missiles
 // ----------------------------------------------------------
 void Init(void){ uint8_t i;
-		//Enemies
-		for(i=0;i<4;i++){
-				Enemy[i].x = 20*i;
-				Enemy[i].y = ENEMY30H;
-				Enemy[i].image = SmallEnemy30PointA;
-				Enemy[i].life = 1;
-		 }
-		 //Ship
-		 Ship.x = 32;
-		 Ship.y = 47;
-		 Ship.image = PlayerShip0;
-		 Ship.life =1;
-		 //Bunker
-		 Bunker.x = 32;
-		 Bunker.y = 47- PLAYERH -1;
-		 Bunker.image = Bunker0;
-		 Bunker.life = 1;
-		//Missiles
-		 n_missile.life = 0;
-		 missile[0].life = 0;
-		 missile[1].life = 0;
-		 laser.life = 0;
-		 laser1.life = 0;
-		 //Global variables
-		 count = 0;
-		 b_state = 0;
-		 e_state = 0;
+	//Enemies
+	for(i=0;i<4;i++){
+		Enemy[i].x = 20*i;
+		Enemy[i].y = ENEMY30H;
+		Enemy[i].image = SmallEnemy30PointA;
+		Enemy[i].life = 1;
+	}
+	//Ship
+	Ship.x = 32;
+	Ship.y = 47;
+	Ship.image = PlayerShip0;
+	Ship.life =1;
+	//Bunker
+	 Bunker.x = 32;
+	 Bunker.y = 47- PLAYERH -1;
+	 Bunker.image = Bunker0;
+	 Bunker.life = 1;
+	 //Missiles
+	 n_missile.life = 0;
+	 missile[0].life = 0;
+	 missile[1].life = 0;
+	 laser.life = 0;
+	 laser1.life = 0;
+	 //Global variables
+	 count = 0;
+	 b_state = 0;
+	 e_state = 0;
 }
 static void n_missile_Init(void){ 
 		n_missile.x = Ship.x+8;
@@ -202,12 +202,12 @@ static void move_n_missile(void){uint8_t i;
 		// If it hit enemy, explode enemy and generate sound
 		else{
 			for(i=0; i<4; i++){
-					if(n_missile.y <= Enemy[i].y+8 && (n_missile.x >= Enemy[i].x+2 && n_missile.x <= Enemy[i].x+11)){
-						Enemy[i].image =SmallExplosion0;
-						Sound_Killed();
-						n_missile.life =0;	// Erase missile
-						count ++;						// Increase enemy counter
-					}
+				if(n_missile.y <= Enemy[i].y+8 && (n_missile.x >= Enemy[i].x+2 && n_missile.x <= Enemy[i].x+11)){
+					Enemy[i].image =SmallExplosion0;
+					Sound_Killed();
+					n_missile.life =0;				// Erase missile
+					count ++;						// Increase enemy counter
+				}
 			}
 		}
 }
@@ -223,15 +223,15 @@ static void move_missile0(void){uint8_t i;
 		}
 		// If it hit enemy, explode enemy and generate sound
 		else{
-				for(i=0; i<4; i++){
-						if(missile[0].y <= Enemy[i].y+8 && (missile[0].x >= Enemy[i].x+2 && missile[0].x <= Enemy[i].x+11)){
-							Enemy[i].image =SmallExplosion0;
-							Sound_Killed();
-							missile[0].life =0;				// Erase missile
-							count ++;									// Increase enemy counter
-						}
+			for(i=0; i<4; i++){
+				if(missile[0].y <= Enemy[i].y+8 && (missile[0].x >= Enemy[i].x+2 && missile[0].x <= Enemy[i].x+11)){
+					Enemy[i].image =SmallExplosion0;
+					Sound_Killed();
+					missile[0].life =0;							// Erase missile
+					count ++;									// Increase enemy counter
 				}
 			}
+		}
 }
 
 // Move ship special missile 2
@@ -245,14 +245,14 @@ static void move_missile1(void){uint8_t i;
 		}
 		// If it hit enemy, explode enemy and generate sound
 		else{
-				for(i=0; i<4; i++){
-						if(missile[1].y <= Enemy[i].y+8 && (missile[1].x >= Enemy[i].x+2 && missile[1].x <= Enemy[i].x+11)){
-							Enemy[i].image =SmallExplosion0;
-							Sound_Killed();
-							missile[1].life =0;				// Erase missile
-							count ++;									// Increase enemy counter
-						}
+			for(i=0; i<4; i++){
+				if(missile[1].y <= Enemy[i].y+8 && (missile[1].x >= Enemy[i].x+2 && missile[1].x <= Enemy[i].x+11)){
+					Enemy[i].image =SmallExplosion0;
+					Sound_Killed();
+					missile[1].life =0;							// Erase missile
+					count ++;									// Increase enemy counter
 				}
+			}
 		}
 }
 
@@ -269,7 +269,7 @@ static void move_laser(void){
 					laser.life = 0;
 					Bunker.image = Bunker_state[b_state++];
 					if(Bunker.image == Bunker_state[2])
-								Sound_Explosion();
+					Sound_Explosion();
 			}
 			// If it hit ship, explode it and generate sound
 			else if(((laser.y >= Ship.y-7) && (laser.x >= Ship.x+2 && laser.x <= Ship.x +17))){
@@ -284,8 +284,8 @@ static void move_laser(void){
 // --------------------
 static void move_laser1(void){
 		laser1.y += 2;					// Missile speed
-		if((laser1.y > 47)){		// If it goes off screen , erase the missile
-				laser1.life = 0;
+		if((laser1.y > 47)){			// If it goes off screen , erase the missile
+			laser1.life = 0;
 		}
 		// If it hit bunker, damage it
 		else{
@@ -301,7 +301,7 @@ static void move_laser1(void){
 					Ship.image = BigExplosion0; 
 					Sound_Explosion();
 			}
-	}
+		}
 }
 
 // Move player ship
@@ -322,20 +322,20 @@ static void move_enemy_x(void){
 		int8_t enemy_pos[16] = {-2, 2, -2, -2, 2, -2, 2, -2, 2, -2, 2, -2, 2, -2, 2, -2};
 		r = Random() % 200;
 		if(r < 16){
-				m = enemy_pos[r];
-				for(i=0;i<4;i++){				// If one enemy will go off screen, return
-						if(Enemy[i].life ){
-								x = Enemy[i].x;
-								if(((x + m) > 68) || ((x + m) < 1)){
-										return;
-								}
-						}
+			m = enemy_pos[r];
+			for(i=0;i<4;i++){				// If one enemy will go off screen, return
+				if(Enemy[i].life ){
+					x = Enemy[i].x;
+					if(((x + m) > 68) || ((x + m) < 1)){
+						return;
+					}
 				}
-				e_state++;
-				for(i=0; i<4; i++){
-						Enemy[i].x += m;
-						Enemy[i].image = Enemy_state[e_state&0x01];	// Change enemy image if it moves in x direction
-				}
+			}
+			e_state++;
+			for(i=0; i<4; i++){
+				Enemy[i].x += m;
+				Enemy[i].image = Enemy_state[e_state&0x01];	// Change enemy image if it moves in x direction
+			}
 		}
 }
 
@@ -347,18 +347,18 @@ static void move_enemy_y(void){
 		int8_t enemy_pos[16] = {1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1};
 		r = Random() % 200;
 		if(r < 16){
-				m = enemy_pos[r];
-				for(i=0;i<4;i++){			// If one enemy will go off screen, return
-						if(Enemy[i].life){
-								y = Enemy[i].y;
-								if(((y + m) > 20) || ((y + m) < 10)){
-										return;
-								}
-						}
+			m = enemy_pos[r];
+			for(i=0;i<4;i++){			// If one enemy will go off screen, return
+				if(Enemy[i].life){
+					y = Enemy[i].y;
+					if(((y + m) > 20) || ((y + m) < 10)){
+						return;
+					}
 				}
-				for(i=0; i<4; i++){
-						Enemy[i].y += m;
-				}
+			}
+			for(i=0; i<4; i++){
+				Enemy[i].y += m;
+			}
 		}
 }
 
