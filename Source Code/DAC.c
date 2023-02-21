@@ -57,10 +57,10 @@ void Sound_Init(void){
 // Play sounds
 // ------------
 void Sound_Play(const uint8_t *pt, uint32_t count){
-  Wave = pt;				// The sound wave to be sent out to DAC
-  Index = 0;				// Set index to 0
+  Wave = pt;			// The sound wave to be sent out to DAC
+  Index = 0;			// Set index to 0
   Count = count;		// Set Count to wave size
-	Timer2A_Start();	// Start interrupts
+  Timer2A_Start();		// Start interrupts
 }
 void Sound_Shoot(void){
   Sound_Play(shoot,4080);
