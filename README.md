@@ -11,6 +11,6 @@ The game includes all of the basic features of the original Space Invaders game,
  
  The code is organized into several modules that handle different aspects of the game, including the LCD screen display, the game logic, the input controls, and the sound effects. The code is written in C language and is well-documented, making it easy to understand and modify. The game size is only 21 KB.
  ## Software Requirements
- You can build the game only on simulation using keil free version and use texas simulator of the launcpad.
+ You can build the game only on simulation using keil free version and use texas simulator of the launchpad.
  ## Hardware Requirements
  To use this code, you will need to have TM4C123GH6PM microcontroller (Tiva C LaunchPad), Nokia 5110 LCD screen, two 10k resistors (pull-up), four resistors with ratios: R-2R-4R-8R(DAC), two push buttons(fire), Linear Slide Potentiometer 10K, audio female socket 5-pin, jumpers and speaker.
