@@ -13,4 +13,4 @@ The game includes all of the basic features of the original Space Invaders game,
  ## Software Requirements
  You can build the game only on simulation using keil free version and use texas simulator of the launcpad.
  ## Hardware Requirements
- To use this code, you will need to have TM4C123GH6PM microcontroller (Tiva C LaunchPad), Nokia 5110 LCD screen, two 10k resistors, four resistors with ratios: R-2R-4R-8R, two push buttons, Linear Slide Potentiometer 10K, audio female socket 5-pin, jumpers and speaker.
+ To use this code, you will need to have TM4C123GH6PM microcontroller (Tiva C LaunchPad), Nokia 5110 LCD screen, two 10k resistors (pull-up), four resistors with ratios: R-2R-4R-8R(DAC), two push buttons(fire), Linear Slide Potentiometer 10K, audio female socket 5-pin, jumpers and speaker.
