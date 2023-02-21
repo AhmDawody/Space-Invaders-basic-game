@@ -37,7 +37,7 @@ void Delay100ms(uint32_t count){uint32_t volatile time;
   while(count>0){
     time = 727240;  // 0.1sec at 80 MHz
     while(time){
-	  	time--;
+	time--;
     }
     count--;
   }
@@ -46,8 +46,8 @@ void Delay100ms(uint32_t count){uint32_t volatile time;
 // Systick ISR
 // ------------
 void SysTick_Handler(void){  // runs at 30 Hz
-	move_ship();
-	check_missile();
-	move_enemy();
+  move_ship();
+  check_missile();
+  move_enemy();
   Flag = 1;		 // Set flag to indicate interrupt has occurred
 }
