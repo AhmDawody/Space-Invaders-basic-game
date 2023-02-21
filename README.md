@@ -14,3 +14,41 @@ The game includes all of the basic features of the original Space Invaders game,
  You can build the game only on simulation using keil free version and use texas simulator of the launchpad.
  ## Hardware Requirements
  To use this code, you will need to have TM4C123GH6PM microcontroller (Tiva C LaunchPad), Nokia 5110 LCD screen, two 10k resistors (pull-up), four resistors with ratios: R-2R-4R-8R(DAC), two push buttons(fire), Linear Slide Potentiometer 10K, audio female socket 5-pin, jumpers and speaker.
+## Hardware Connections
+ * Slide pot pin 1 connected to ground
+ * Slide pot pin 2 connected to PE2/AIN1
+ * Slide pot pin 3 connected to +3.3V 
+ * fire button connected to PE1 with R 10k to ground 
+ * special weapon fire button connected to PE0 with R 10k to ground 
+ * 8*R resistor DAC bit 0 on PB0 (least significant bit)
+ * 4*R resistor DAC bit 1 on PB1
+ * 2*R resistor DAC bit 2 on PB2
+ * 1*R resistor DAC bit 3 on PB3 (most significant bit)
+ * Speaker connected to DAC out
+ 
+ <div>
+ <img src="https://user-images.githubusercontent.com/107086104/220455302-b4d6dcbb-eead-4e2c-b904-14c25f6bf18e.jpg" width="200">
+ </div>
+ 
+ ### Blue Nokia 5110           
+ * Signal        (Nokia 5110) LaunchPad pin  				  
+ * Reset         (RST, pin 1) connected to PA7								
+ * SSI0Fss       (CE,  pin 2) connected to PA3							
+ * Data/Command  (DC,  pin 3) connected to PA6				
+ * SSI0Tx        (Din, pin 4) connected to PA5								
+ * SSI0Clk       (Clk, pin 5) connected to PA2									
+ * 3.3V          (Vcc, pin 6) power																	
+ * back light    (BL,  pin 7) not connected, consists of 4 white LEDs which draw ~80mA total						
+ * Ground        (Gnd, pin 8) ground													
+										
+ ### Red SparkFun Nokia 5110 (LCD-10168)																					
+ * Signal        (Nokia 5110) LaunchPad pin								
+ * 3.3V          (VCC, pin 1) power											
+ * Ground        (GND, pin 2) ground														
+ * SSI0Fss       (SCE, pin 3) connected to PA3										
+ * Reset         (RST, pin 4) connected to PA7											
+ * Data/Command  (D/C, pin 5) connected to PA6												
+ * SSI0Tx        (DN,  pin 6) connected to PA5											
+ * SSI0Clk       (SCLK, pin 7) connected to PA2											
+ * back light    (LED, pin 8) not connected, consists of 4 white LEDs which draw ~80mA total										
+ 
