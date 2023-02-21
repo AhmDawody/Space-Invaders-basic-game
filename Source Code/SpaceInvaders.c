@@ -85,40 +85,40 @@ extern bool Flag;
 /************* Main Function *****************************/
 /*********************************************************/
 int main(void){
-	__asm(" CPSID  I ");				// Disable Interrupts using assembly language
-	PLL_Init();									// Initialize the PLL for 80 MHz clock frequency
-	SysTick_Init(2666667);			// Initialize the SysTick timer with a frequency of 30 Hz
-	Nokia5110_Init();						// Initialize the Nokia5110 LCD screen
-	Timer2_Init(7256);					// Initialize Timer2 for sound generation
-	DAC_Init();									// Initialize the digital-to-analog converter
-	Sound_Init();								// Initialize sound generation module
-	ADC0_Init();								// Initialize analog-to-digital converter for input control
-	Random_Init(NVIC_ST_CURRENT_R); 						// Initialize a random seed for random number generation
-	Draw_welcome();							// Draw the welcome screen
-	Init();											// Initialize game sprites
-	__asm(" CPSIE  I ");				// Enable Interrupts using assembly language
-	Draw();											// Draw sprites on screen
-	while(1){    								
-		while(Flag==0){};    			// Wait for Flag to be set, indicating it's time to update the display
-    Draw();     							// Call the Draw function to update the game display
-    Flag = 0;   							// Clear the Flag to indicate that the display has been updated
-		if(ship_dead()){    			// If the player's ship is destroyed, execute the following code
-				__asm(" CPSID  I ");  // Disable interrupts to prevent the game from updating while the game over message is displayed
-				Delay100ms(5);     		// Wait 
-				Draw_score();         // Call the Draw_score function to display the game over message and the final score
-				Sound_Init();         // Call the Sound_Init function to stop the sounds
-				Init();               // Call the Init function to reset the game and initialize the game sprites
-				__asm(" CPSIE  I ");  // Re-enable interrupts to allow the game to reset and start again
-		}
-		else{   									// If the player's ship is not destroyed, execute the following code
-			if(victory()){  				// If all the aliens are destroyed, execute the following code
-					__asm(" CPSID  I ");// Disable interrupts to prevent the game from updating while the victory message is displayed
-					Delay100ms(5);     	// Wait for 1 second
-					Draw_victory();     // Call the Draw_victory function to display the victory message
-					Sound_Init();       // Call the Sound_Init function to stop the sounds
-					Init();             // Call the Init function to reset the game and initialize the game sprites
-					__asm(" CPSIE  I ");// Re-enable interrupts to allow the game to reset and start again
-			}
+  __asm(" CPSID  I ");				// Disable Interrupts using assembly language
+  PLL_Init();					// Initialize the PLL for 80 MHz clock frequency
+  SysTick_Init(2666667);			// Initialize the SysTick timer with a frequency of 30 Hz
+  Nokia5110_Init();				// Initialize the Nokia5110 LCD screen
+  Timer2_Init(7256);				// Initialize Timer2 for sound generation
+  DAC_Init();					// Initialize the digital-to-analog converter
+  Sound_Init();					// Initialize sound generation module
+  ADC0_Init();					// Initialize analog-to-digital converter for input control
+  Random_Init(NVIC_ST_CURRENT_R); 		// Initialize a random seed for random number generation
+  Draw_welcome();				// Draw the welcome screen
+  Init();					// Initialize game sprites
+  __asm(" CPSIE  I ");				// Enable Interrupts using assembly language
+  Draw();					// Draw sprites on screen
+  while(1){    								
+	while(Flag==0){};    			// Wait for Flag to be set, indicating it's time to update the display
+    	Draw();     				// Call the Draw function to update the game display
+    	Flag = 0;   				// Clear the Flag to indicate that the display has been updated
+    	if(ship_dead()){    			// If the player's ship is destroyed, execute the following code
+		__asm(" CPSID  I ");  		// Disable interrupts to prevent the game from updating while the game over message is displayed
+		Delay100ms(5);     		// Wait 
+		Draw_score();         		// Call the Draw_score function to display the game over message and the final score
+		Sound_Init();         		// Call the Sound_Init function to stop the sounds
+		Init();               		// Call the Init function to reset the game and initialize the game sprites
+		__asm(" CPSIE  I ");  		// Re-enable interrupts to allow the game to reset and start again
+	}
+	else{   				// If the player's ship is not destroyed, execute the following code
+		if(victory()){  		// If all the aliens are destroyed, execute the following code
+		__asm(" CPSID  I ");		// Disable interrupts to prevent the game from updating while the victory message is displayed
+		Delay100ms(5);     		// Wait for 1 second
+		Draw_victory();     		// Call the Draw_victory function to display the victory message
+		Sound_Init();       		// Call the Sound_Init function to stop the sounds
+		Init();             		// Call the Init function to reset the game and initialize the game sprites
+		__asm(" CPSIE  I ");		// Re-enable interrupts to allow the game to reset and start again
 		}
 	}
+}
 }
