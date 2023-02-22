@@ -196,18 +196,18 @@ void check_missile(void){uint8_t r, m;
 static void move_n_missile(void){uint8_t i;
 		n_missile.y -= 3;		// Missile speed
 		// If it goes off screen or hit bunker, erase the missile
-		if((n_missile.y <= 1) || ((n_missile.y >= Bunker.y) && (n_missile.x+1 >= Bunker.x && n_missile.x <= Bunker.x +17))){
-			n_missile.life = 0;
+		if((n_missile.y <= 1) || ((n_missile.y >= Bunker.y) && (n_missile.x+1 >= Bunker.x && n_missile.x < Bunker.x +BUNKERW))){
+				n_missile.life = 0;
 		}
 		// If it hit enemy, explode enemy and generate sound
 		else{
 			for(i=0; i<4; i++){
-				if(n_missile.y <= Enemy[i].y+8 && (n_missile.x >= Enemy[i].x+2 && n_missile.x <= Enemy[i].x+11)){
-					Enemy[i].image =SmallExplosion0;
-					Sound_Killed();
-					n_missile.life =0;				// Erase missile
-					count ++;						// Increase enemy counter
-				}
+					if(n_missile.y <= Enemy[i].y + MISSILEH && (n_missile.x >= Enemy[i].x+2 && n_missile.x <= Enemy[i].x + ENEMY30W - 4)){
+						Enemy[i].image =SmallExplosion0;
+						Sound_Killed();
+						n_missile.life =0;	// Erase missile
+						count ++;						// Increase enemy counter
+					}
 			}
 		}
 }
@@ -218,20 +218,20 @@ static void move_missile0(void){uint8_t i;
 		missile[0].y -= 3;			// Missile speed
 		missile[0].x -= 1;			// Missile speed
 		// If it goes off screen or hit bunker, erase the missile
-		if((missile[0].x <= 1 || missile[0].y <= 1)|| ((missile[0].y >= Bunker.y) && (missile[0].x+1 >= Bunker.x && missile[0].x <= Bunker.x +17))){
+		if((missile[0].x < 1 || missile[0].y <= 1)|| ((missile[0].y >= Bunker.y) && (missile[0].x+1 >= Bunker.x && missile[0].x <= Bunker.x + BUNKERW))){
 				missile[0].life = 0;
 		}
 		// If it hit enemy, explode enemy and generate sound
 		else{
-			for(i=0; i<4; i++){
-				if(missile[0].y <= Enemy[i].y+8 && (missile[0].x >= Enemy[i].x+2 && missile[0].x <= Enemy[i].x+11)){
-					Enemy[i].image =SmallExplosion0;
-					Sound_Killed();
-					missile[0].life =0;							// Erase missile
-					count ++;									// Increase enemy counter
+				for(i=0; i<4; i++){
+						if(missile[0].y <= Enemy[i].y + MISSILEH && (missile[0].x >= Enemy[i].x+2 && missile[0].x <= Enemy[i].x + ENEMY30W - 4)){
+							Enemy[i].image =SmallExplosion0;
+							Sound_Killed();
+							missile[0].life =0;				// Erase missile
+							count ++;									// Increase enemy counter
+						}
 				}
 			}
-		}
 }
 
 // Move ship special missile 2
@@ -240,19 +240,19 @@ static void move_missile1(void){uint8_t i;
 		missile[1].y -= 3;				// Missile speed
 		missile[1].x += 1;				// Missile speed
 		// If it goes off screen or hit bunker, erase the missile
-		if((missile[1].x >= 82 || missile[1].y <= 1) || ((missile[1].y >= Bunker.y) && (missile[1].x+1 >= Bunker.x && missile[1].x <= Bunker.x +17))){
-			missile[1].life = 0;
+		if((missile[1].x >= 83 || missile[1].y <= 1) || ((missile[1].y >= Bunker.y) && (missile[1].x >= Bunker.x && missile[1].x < Bunker.x + BUNKERW))){
+				missile[1].life = 0;
 		}
 		// If it hit enemy, explode enemy and generate sound
 		else{
-			for(i=0; i<4; i++){
-				if(missile[1].y <= Enemy[i].y+8 && (missile[1].x >= Enemy[i].x+2 && missile[1].x <= Enemy[i].x+11)){
-					Enemy[i].image =SmallExplosion0;
-					Sound_Killed();
-					missile[1].life =0;							// Erase missile
-					count ++;									// Increase enemy counter
+				for(i=0; i<4; i++){
+						if(missile[1].y <= Enemy[i].y+8 && (missile[1].x >= Enemy[i].x+2 && missile[1].x <= Enemy[i].x+11)){
+							Enemy[i].image =SmallExplosion0;
+							Sound_Killed();
+							missile[1].life =0;				// Erase missile
+							count ++;									// Increase enemy counter
+						}
 				}
-			}
 		}
 }
 
@@ -261,47 +261,47 @@ static void move_missile1(void){uint8_t i;
 static void move_laser(void){
 		laser.y += 2;					// Missile speed
 		if((laser.y > 47)){		// If it goes off screen , erase the missile
-			laser.life = 0;
+				laser.life = 0;
 		}
 		// If it hit bunker, damage it
 		else{
-			if(((laser.y >= Bunker.y-5) && (laser.x >= Bunker.x && laser.x <= Bunker.x +17))){		//hit bunker
-				laser.life = 0;
-				Bunker.image = Bunker_state[b_state++];
-				if(Bunker.image == Bunker_state[2])
-					Sound_Explosion();
+			if(((laser.y >= Bunker.y - BUNKERH) && (laser.x >= Bunker.x && laser.x < Bunker.x + BUNKERW))){		//hit bunker
+					laser.life = 0;
+					Bunker.image = Bunker_state[b_state++];
+					if(Bunker.image == Bunker_state[2])
+								Sound_Explosion();
 			}
 			// If it hit ship, explode it and generate sound
-			else if(((laser.y >= Ship.y-7) && (laser.x >= Ship.x+2 && laser.x <= Ship.x +17))){
-				laser.life = 0;
-				Ship.image = BigExplosion0; 
-				Sound_Explosion();
+			else if(((laser.y >= Ship.y - PLAYERH) && (laser.x >= Ship.x+2 && laser.x < Ship.x + PLAYERW))){
+					laser.life = 0;
+					Ship.image = BigExplosion0; 
+					Sound_Explosion();
 			}
-		}
+	}
 }
 
 // Move enemy missile 2
 // --------------------
 static void move_laser1(void){
 		laser1.y += 2;					// Missile speed
-		if((laser1.y > 47)){			// If it goes off screen , erase the missile
-			laser1.life = 0;
+		if((laser1.y > 47)){		// If it goes off screen , erase the missile
+				laser1.life = 0;
 		}
 		// If it hit bunker, damage it
 		else{
-			if(((laser1.y >= Bunker.y-5) && (laser1.x >= Bunker.x && laser1.x <= Bunker.x +17))){		//hit bunker
-				laser1.life = 0;
-				Bunker.image = Bunker_state[b_state++];
-				if(Bunker.image == Bunker_state[2])
-					Sound_Explosion();
+			if(((laser1.y >= Bunker.y- BUNKERH) && (laser1.x >= Bunker.x && laser1.x < Bunker.x + BUNKERW))){		//hit bunker
+					laser1.life = 0;
+					Bunker.image = Bunker_state[b_state++];
+					if(Bunker.image == Bunker_state[2])
+								Sound_Explosion();
 			}
 			// If it hit ship, explode it and generate sound
-			else if(((laser1.y >= Ship.y-7) && (laser1.x >= Ship.x+2 && laser1.x <= Ship.x +17))){
-				laser1.life = 0;
-				Ship.image = BigExplosion0; 
-				Sound_Explosion();
+			else if(((laser1.y >= Ship.y- PLAYERH) && (laser1.x >= Ship.x+2 && laser1.x < Ship.x + PLAYERW))){
+					laser1.life = 0;
+					Ship.image = BigExplosion0; 
+					Sound_Explosion();
 			}
-		}
+	}
 }
 
 // Move player ship
