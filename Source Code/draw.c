@@ -18,8 +18,8 @@
 // Structs
 // --------
 typedef struct State{
-  uint8_t x;      				// x coordinate
-  uint8_t y;      				// y coordinate
+  uint8_t x;      					// x coordinate
+  uint8_t y;      					// y coordinate
   const uint8_t *image; 			// ptr->image
   uint32_t life;           	 		// 0=dead, 1=alive
 }STyp;
@@ -117,47 +117,47 @@ void Draw(void){uint8_t i;
 		if(Enemy[i].life > 0){
 			Nokia5110_PrintBMP(Enemy[i].x, Enemy[i].y, Enemy[i].image, 0);
 			if(Enemy[i].image == SmallExplosion0){
-					Enemy[i].life = 0;
-					Enemy[i].x = 100;
-					Enemy[i].y = 100;
+				Enemy[i].life = 0;
+				Enemy[i].x = 100;
+				Enemy[i].y = 100;
 			}
 		}
 	}
 	// Draw alive player ship
 	if(Ship.life > 0){
-			Nokia5110_PrintBMP(Ship.x, Ship.y, Ship.image, 0);
-			if(Ship.image == BigExplosion0){
-					Ship.life = 0;
-					Ship.x = 100;
-					Ship.y = 100;
-			}
+		Nokia5110_PrintBMP(Ship.x, Ship.y, Ship.image, 0);
+		if(Ship.image == BigExplosion0){
+			Ship.life = 0;
+			Ship.x = 100;
+			Ship.y = 100;
+		}
 	}	
 	// Draw alive  normal missile		
 	if(n_missile.life > 0){
-			Nokia5110_PrintBMP(n_missile.x, n_missile.y, n_missile.image, 0);
+		Nokia5110_PrintBMP(n_missile.x, n_missile.y, n_missile.image, 0);
 	}
 	// Draw alive bunker
 	if(Bunker.life > 0){
-			Nokia5110_PrintBMP(Bunker.x, Bunker.y, Bunker.image, 0);
-			if(Bunker.image == SmallExplosion0){
-					Bunker.life = 0;
-					Bunker.x = 100;
-					Bunker.y = 100;
-			}			
+		Nokia5110_PrintBMP(Bunker.x, Bunker.y, Bunker.image, 0);
+		if(Bunker.image == SmallExplosion0){
+			Bunker.life = 0;
+			Bunker.x = 100;
+			Bunker.y = 100;
+		}			
 	}
 	// Draw special missile	
 	if(missile[0].life > 0){
-			Nokia5110_PrintBMP(missile[0].x, missile[0].y, missile[0].image, 0);		
+		Nokia5110_PrintBMP(missile[0].x, missile[0].y, missile[0].image, 0);		
 	}
 	if(missile[1].life > 0){
-			Nokia5110_PrintBMP(missile[1].x, missile[1].y, missile[1].image, 0);		
+		Nokia5110_PrintBMP(missile[1].x, missile[1].y, missile[1].image, 0);		
 		}
 	// Draw alive  enemy missile	
 	if(laser.life > 0){
-			Nokia5110_PrintBMP(laser.x, laser.y, laser.image, 0);		
+		Nokia5110_PrintBMP(laser.x, laser.y, laser.image, 0);		
 	}
 	if(laser1.life > 0){
-			Nokia5110_PrintBMP(laser1.x, laser1.y, laser1.image, 0);		
+		Nokia5110_PrintBMP(laser1.x, laser1.y, laser1.image, 0);		
 	}
 	Nokia5110_DisplayBuffer();      // draw buffer
 }
