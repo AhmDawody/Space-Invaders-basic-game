@@ -40,10 +40,10 @@
 // structs
 // ----------
 typedef struct State{
-  uint8_t x;      								// x coordinate
-  uint8_t y;      								// y coordinate
-  const uint8_t *image; 					// ptr->image
-  uint32_t life;           	 			// 0=dead, 1=alive
+  uint8_t x;      					// x coordinate
+  uint8_t y;      					// y coordinate
+  const uint8_t *image; 			// ptr->image
+  uint32_t life;           	 		// 0=dead, 1=alive
 }STyp;
 
 // externs
@@ -62,21 +62,21 @@ extern const uint8_t Laser0[];
 
 // Global Variables
 // -----------------
-uint8_t b_state;							// Bunker state counter
-uint16_t e_state;							// Enemy state counter
-uint8_t count;								// Enemy kill counter
-STyp Enemy[4];								// 4 Enemies
-STyp Ship;										// Player Ship
-STyp Bunker;									// Bunker
-STyp n_missile;								// Ship normal missile
-STyp missile[2];							// Ship special missile
-STyp laser;										// Enemy missile
-STyp laser1;									// Enemy missile
+uint8_t b_state;					// Bunker state counter
+uint16_t e_state;					// Enemy state counter
+uint8_t count;						// Enemy kill counter
+STyp Enemy[4];						// 4 Enemies
+STyp Ship;							// Player Ship
+STyp Bunker;						// Bunker
+STyp n_missile;						// Ship normal missile
+STyp missile[2];					// Ship special missile
+STyp laser;							// Enemy missile
+STyp laser1;						// Enemy missile
 
 // Constans
 // ---------
-const uint8_t *Bunker_state[]={Bunker1, Bunker2, SmallExplosion0};				//	bunker state images
-const uint8_t *Enemy_state[]={SmallEnemy30PointB, SmallEnemy30PointA};		//	Enemy state images
+const uint8_t *Bunker_state[]={Bunker1, Bunker2, SmallExplosion0};			// bunker state images
+const uint8_t *Enemy_state[]={SmallEnemy30PointB, SmallEnemy30PointA};		// Enemy state images
 
 // Function Prototypes
 // --------------------
@@ -97,7 +97,7 @@ static void move_enemy_y(void);
 void Init(void){ uint8_t i;
 	//Enemies
 	for(i=0;i<4;i++){
-		Enemy[i].x = 20*i;
+	Enemy[i].x = 20*i;
 		Enemy[i].y = ENEMY30H;
 		Enemy[i].image = SmallEnemy30PointA;
 		Enemy[i].life = 1;
@@ -108,20 +108,20 @@ void Init(void){ uint8_t i;
 	Ship.image = PlayerShip0;
 	Ship.life =1;
 	//Bunker
-	 Bunker.x = 32;
-	 Bunker.y = 47- PLAYERH -1;
-	 Bunker.image = Bunker0;
-	 Bunker.life = 1;
-	 //Missiles
-	 n_missile.life = 0;
-	 missile[0].life = 0;
-	 missile[1].life = 0;
-	 laser.life = 0;
-	 laser1.life = 0;
-	 //Global variables
-	 count = 0;
-	 b_state = 0;
-	 e_state = 0;
+	Bunker.x = 32;
+	Bunker.y = 47- PLAYERH -1;
+	Bunker.image = Bunker0;
+	Bunker.life = 1;
+ 	//Missiles
+	n_missile.life = 0;
+	missile[0].life = 0;
+	missile[1].life = 0;
+	laser.life = 0;
+	laser1.life = 0;
+	//Global variables
+	count = 0;
+	b_state = 0;
+	e_state = 0;
 }
 static void n_missile_Init(void){ 
 		n_missile.x = Ship.x+8;
@@ -160,34 +160,34 @@ void check_missile(void){uint8_t r, m;
 		m = Random() % 4;
 		// If SW1 is pressed, initialize special missile and generate sound
 		if((GPIO_PORTE_DATA_R&0x01) && (!missile[0].life) && (!missile[1].life) && (!n_missile.life)){
-				missile_Init();
-				Sound_Shoot();
+			missile_Init();
+			Sound_Shoot();
 		}
 		// If SW2 is pressed, initialize normal missile and generate sound
 		else if((GPIO_PORTE_DATA_R&0x02) && (!missile[0].life) && (!missile[1].life) && (!n_missile.life)){
-				n_missile_Init();
-				Sound_Shoot();
+			n_missile_Init();
+			Sound_Shoot();
 		}
 		// If missile is initialized, move them
 		if(n_missile.life){
-				move_n_missile();
+			move_n_missile();
 		}
 		if(missile[0].life){
-				move_missile0();
+			move_missile0();
 		}
 		if(missile[1].life){
-				move_missile1();
+			move_missile1();
 		}
 		// If enemy laser is initialized, move it. else initialize it
 		if(laser.life){
-				move_laser();
+			move_laser();
 		}else{
-				enemy_laser_Init(r);
+			enemy_laser_Init(r);
 		}
 		if(laser1.life){
-				move_laser1();
+			move_laser1();
 		}else{
-				enemy_laser1_Init(m);
+			enemy_laser1_Init(m);
 		}
 }
 
@@ -197,7 +197,7 @@ static void move_n_missile(void){uint8_t i;
 		n_missile.y -= 3;		// Missile speed
 		// If it goes off screen or hit bunker, erase the missile
 		if((n_missile.y <= 1) || ((n_missile.y >= Bunker.y) && (n_missile.x+1 >= Bunker.x && n_missile.x <= Bunker.x +17))){
-				n_missile.life = 0;
+			n_missile.life = 0;
 		}
 		// If it hit enemy, explode enemy and generate sound
 		else{
@@ -241,7 +241,7 @@ static void move_missile1(void){uint8_t i;
 		missile[1].x += 1;				// Missile speed
 		// If it goes off screen or hit bunker, erase the missile
 		if((missile[1].x >= 82 || missile[1].y <= 1) || ((missile[1].y >= Bunker.y) && (missile[1].x+1 >= Bunker.x && missile[1].x <= Bunker.x +17))){
-				missile[1].life = 0;
+			missile[1].life = 0;
 		}
 		// If it hit enemy, explode enemy and generate sound
 		else{
@@ -261,23 +261,23 @@ static void move_missile1(void){uint8_t i;
 static void move_laser(void){
 		laser.y += 2;					// Missile speed
 		if((laser.y > 47)){		// If it goes off screen , erase the missile
-				laser.life = 0;
+			laser.life = 0;
 		}
 		// If it hit bunker, damage it
 		else{
 			if(((laser.y >= Bunker.y-5) && (laser.x >= Bunker.x && laser.x <= Bunker.x +17))){		//hit bunker
-					laser.life = 0;
-					Bunker.image = Bunker_state[b_state++];
-					if(Bunker.image == Bunker_state[2])
+				laser.life = 0;
+				Bunker.image = Bunker_state[b_state++];
+				if(Bunker.image == Bunker_state[2])
 					Sound_Explosion();
 			}
 			// If it hit ship, explode it and generate sound
 			else if(((laser.y >= Ship.y-7) && (laser.x >= Ship.x+2 && laser.x <= Ship.x +17))){
-					laser.life = 0;
-					Ship.image = BigExplosion0; 
-					Sound_Explosion();
+				laser.life = 0;
+				Ship.image = BigExplosion0; 
+				Sound_Explosion();
 			}
-	}
+		}
 }
 
 // Move enemy missile 2
@@ -290,16 +290,16 @@ static void move_laser1(void){
 		// If it hit bunker, damage it
 		else{
 			if(((laser1.y >= Bunker.y-5) && (laser1.x >= Bunker.x && laser1.x <= Bunker.x +17))){		//hit bunker
-					laser1.life = 0;
-					Bunker.image = Bunker_state[b_state++];
-					if(Bunker.image == Bunker_state[2])
-								Sound_Explosion();
+				laser1.life = 0;
+				Bunker.image = Bunker_state[b_state++];
+				if(Bunker.image == Bunker_state[2])
+					Sound_Explosion();
 			}
 			// If it hit ship, explode it and generate sound
 			else if(((laser1.y >= Ship.y-7) && (laser1.x >= Ship.x+2 && laser1.x <= Ship.x +17))){
-					laser1.life = 0;
-					Ship.image = BigExplosion0; 
-					Sound_Explosion();
+				laser1.life = 0;
+				Ship.image = BigExplosion0; 
+				Sound_Explosion();
 			}
 		}
 }
@@ -373,9 +373,9 @@ void move_enemy(void){
 // --------------------------------------------
 bool ship_dead(void){
 	if(Ship.life == 0)
-			return 1;
+		return 1;
 	else 
-			return 0;
+		return 0;
 }
 
 // Return 1 if all enemies are destroyed, else return 0
