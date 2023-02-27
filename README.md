@@ -51,4 +51,6 @@ The game includes all of the basic features of the original Space Invaders game,
  * SSI0Tx        (DN,  pin 6) connected to PA5											
  * SSI0Clk       (SCLK, pin 7) connected to PA2											
  * back light    (LED, pin 8) not connected, consists of 4 white LEDs which draw ~80mA total										
- 
+ ## Game Idea
+ The Game idea is based on periodic interrupt of the Systick and GPTimer timers, the Systick timer is the responsible of updating the LCD display which contains the sprites movements and attacks and the visual explosions by generating a periodic interrupt of frequency 30 Hz.  
+ The GPTimer is responsible of the audio, it generates a periodic interrupt of frequency 11 KHz which includes the attacks and explosions sounds. 
