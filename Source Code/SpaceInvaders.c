@@ -66,7 +66,6 @@
  * and maintain the code.*/
 #include <stdint.h>
 #include <stdbool.h>  
-#include "tm4c123gh6pm.h"
 #include "Nokia5110.h"
 #include "Random.h"
 #include "Systick.h"
@@ -93,7 +92,7 @@ int main(void){
   DAC_Init();					// Initialize the digital-to-analog converter
   Sound_Init();					// Initialize sound generation module
   ADC0_Init();					// Initialize analog-to-digital converter for input control
-  Random_Init(NVIC_ST_CURRENT_R); 		// Initialize a random seed for random number generation
+  Random_Init(0); 				// Initialize a random seed for random number generation
   Draw_welcome();				// Draw the welcome screen
   Init();					// Initialize game sprites
   __asm(" CPSIE  I ");				// Enable Interrupts using assembly language
